@@ -18,6 +18,7 @@ starlanes: starlanes.o ai.o
 	$(CC) -g starlanes.o ai.o -o starlanes -l$(CURSESLIB)
 
 install:
+	test -d $(INSTALLDIR)/man/man6 || mkdir $(INSTALLDIR)/man/man6
 	cp starlanes $(INSTALLDIR)/bin
 	cp starlanes.6 $(INSTALLDIR)/man/man6/
 	chown bin:bin $(INSTALLDIR)/bin/starlanes
@@ -27,6 +28,7 @@ install:
 
 # fakeinstall just echos the install commands:
 fakeinstall:
+	@echo "test -d $(INSTALLDIR)/man/man6 || mkdir $(INSTALLDIR)/man/man6"
 	@echo cp starlanes $(INSTALLDIR)/bin
 	@echo cp starlanes.6 $(INSTALLDIR)/man/man6
 	@echo chown bin:bin $(INSTALLDIR)/bin/starlanes

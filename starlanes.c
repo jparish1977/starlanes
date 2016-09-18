@@ -1555,7 +1555,7 @@ void shutdown(void)
     endwin();
     printf("Starlanes for ncurses v%s Copyright by Brian \"Beej\" Hall 1997 \n",VERSION);
     printf("Update: David Barnsdale 2004\n");
-    
+    printf("Update: Joe Parish 2016\n"); 
 }
 
 /*

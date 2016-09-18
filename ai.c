@@ -52,11 +52,11 @@ void generate_nme(char *nme)
    nmeNmr++;
 }
 
-enum compass { North,East ,West,South } type;
+enum compass { North,East ,West,South };
 
-enum farcompass {NorthW , FNorth, NorthE, FEast ,SouthE ,FSouth, SouthW ,FWest} type;
+enum farcompass {NorthW , FNorth, NorthE, FEast ,SouthE ,FSouth, SouthW ,FWest};
 
-enum investstatus { none,small ,signif,main } type;
+enum investstatus { none,small ,signif,main };
 
 /* getfarmove gets the charecter value of a location 2 steps away.
 ** It makes no distiction between an empty space and an off map
