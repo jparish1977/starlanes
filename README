@@ -1,0 +1,36 @@
+Type "make" to build the starlanes binaries, then sign on as root
+an type "make fakeinstall"
+which will, uh, pretend to install everything.  If all the commands that
+it's going to execute look correct, go ahead and type "make install" (as
+root) to install the goods.
+
+I would like to claim that the reason there is no
+configure file is because for a small program
+a configure file would be overkill but the
+truth is that I don't as yet know how to make
+one.  Hence the make file may need adjusting.
+For instance sometimes the curses program is
+called plain curses and sometimes ncurses
+It also expects there to be a /man/man6/ directory
+in which case you should 
+
+Please, if you have any problems while installing 
+let me, David, know ("dejvid@zamir.net" and 
+"dejvid@barnsdle.demon.co.uk") even if you
+solve them.     
+
+Of course you can always just change to the directory where
+you installed starlanes and type "./starlanes"
+
+David
+"dejvid@zamir.net" and "dejvid@barnsdle.demon.co.uk"
+
+This is a port to C from a version of Starlanes for the Osborne 1.  The
+original source is from a First Osborne Group (FOG) disk that I probably
+picked up in 1982.  The author isn't identified.  Based on comments in
+a TRS-80 version I picked up off the web, it would appear that it was
+first published in Creative Computing magazine.
+
+-Beej
+beej@ecst.csuchico.edu
+

@@ -1,0 +1,13 @@
+Version 1.3.0 released 2004 by David Barnsdale 
+dejvid@barnsdle.demon.co.uk and dejvid@zamir.net
+
+AI implemented.  All AI related stuff placed in "ai.c".
+
+Information screen giving holdings of all players added.
+
+Bug caused by player earning excess money removed.
+
+
+
+Version 1.2.2 released 1997 by Brian "Beej" Hall
+"beej@ecst.csuchico.edu"

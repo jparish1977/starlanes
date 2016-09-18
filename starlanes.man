@@ -1,0 +1,396 @@
+
+
+
+STARLANES(6)                                         STARLANES(6)
+
+
+NAME
+       starlanes - the game of starlanes
+
+SYNOPSIS
+       starlanes [-v|c|m]
+
+DESCRIPTION
+       Starlanes  is  a  game of interstellar commerce for 1 to 4
+       players.  Players take two-phase turns: the first phase is
+       movement, the second is trading.
+
+       The object of the game is to become as wealthy as possible
+       by trading and merging companies whilst out-smarting  your
+       friends and enemies.
+
+OPTIONS
+       -v   Print version information
+
+       -c   Force the game to play in color mode
+
+       -m   Force the game to play in mono mode
+
+PLAYING STARLANES
+   The Starlanes User Interface
+       Starlanes  is written using color ncurses, but will detect
+       a black and  white  screen  and  will  modify  its  output
+       accordingly.  On Linux, setting TERM=console or TERM=linux
+       either on a virtual console or  in  a  color_xterm  window
+       works well.
+
+       After the initial player determination screen, you will be
+       presented with the main Starlanes screen.  This screen  is
+       split  into  three individual windows: the map window, the
+       company window, and the general info window.
+
+       The map window shows the terrain  of  the  universe.   The
+       legend is:
+
+              * - Star
+              @ - Black hole
+              + - Infant company
+              . - Empty space
+              A - Company A (Altair Starways)
+
+       The  companies  are  Altair  Starways,  Beetlejuice  Ltd.,
+       Capella Freight Co., Denebola Shippers, and Eridani  Expe-
+       diters.   On the map, the companies are represented by the
+       first letter of their name.
+
+       The company window shows information concerning  the  cur-
+       rently existing companies, including the company name, its
+       price per share, and the current player's holdings.
+
+       The general info window will prompt the user for input  if
+
+
+
+Starlanes V1.2.2          29 March 1996                         1
+
+
+
+
+
+STARLANES(6)                                         STARLANES(6)
+
+
+       the player is waiting to move or trade, but will also dis-
+       play special announcements as  they  come  up.   During  a
+       player's  turn,  that  player's  name  is displayed in the
+       title bar of the window, along with his cash holdings.
+
+       Also, mention should be made of  two  other  windows:  the
+       player standings window and the company detail window (not
+       to be confused with the company info window.)
+
+       The player standings window can be brought up  during  the
+       player's  move by pressing the 's' key.  This window shows
+       all the player's names, stock holdings,  cash,  and  total
+       worth, sorted by total worth.  It also shows the number of
+       sectors that remain to be filled by companies  before  the
+       game ends.
+
+       The company detail window is invoked with the 'c' key.  It
+       shows, for each active company, its name, price per share,
+       size,  and  total  worth  (all player's shares * price per
+       share).  The company size and total worth  are  useful  in
+       determining the result of a merger (see below.)
+
+       If  a  screen redraw is necessary, pressing '^L' at almost
+       any of the prompts will accomplish that.
+
+       Finally, if the players  want  to  quit  before  the  game
+       before  is over, press 'q' or '^C' and a quit verification
+       window will pop up.  If 'y' is  pressed,  the  final  game
+       standings will be displayed, and the program will end.
+
+   Player Movement
+       During  the  first  phase of a player's turn, the computer
+       will prompt for a move from a choice of  5.   These  moves
+       are chosen randomly (for the most part).  Upon making your
+       move, there are several things that might happen.   (NOTE:
+       it  is  important  to remember that two objects on the map
+       are adjacent  only  if  they  are  orthogonally  adjacent.
+       Diagonals don't count!)
+
+       If you move into a sector that is completely surrounded by
+       empty space (.), that sector will then contain  an  infant
+       company (+).
+
+       If  you  move next to an existing company (A-E), that com-
+       pany will expand into that sector of the map.  If the  new
+       extension  of  the  company touches an infant company (+),
+       that infant company will also be assimilated.
+
+       Given that you're not moving next to an existing  company,
+       if you move next to a star (*) or an infant company (+), a
+       new company will be formed.  You, as company founder, will
+       receive 5 shares in the company for free.  For calculating
+       how much a company will be  worth,  see  Company  Pricing,
+       below.
+
+
+
+Starlanes V1.2.2          29 March 1996                         2
+
+
+
+
+
+STARLANES(6)                                         STARLANES(6)
+
+
+       If  you  happen  to  move next to a black hole (@), one of
+       many things could happen, depending on the  circumstances.
+       See Black Holes, below.
+
+   Company Pricing
+       Determining  a company's price per share is fairly simple.
+       Generally speaking, a company is worth $100 for every sec-
+       tor it occupies (as given on the company info window under
+       ``Size''), plus $500 for every sector it occupies which is
+       adjacent  to  a  star  (*), minus $500 for every sector it
+       occupies which is adjacent to a black hole (@).  If a com-
+       pany's  price  per  share  drops to 0 or less, the company
+       vanishes (see Black Holes, below.)   Also  note  that  you
+       will  not  be  able to visually estimate a company's price
+       per share if that company has undergone a stock split (see
+       Stock Splits, below.)
+
+   Holding Bonus
+       Immediately  after  a  player's move, he is awarded a cash
+       bonus equal to 5% of the total worth of his complete hold-
+       ings.   This  bonus  is  awarded  even  if  the  game ends
+       directly following the move (see Game's End, below.)  This
+       is the cash that the player will then use during the trad-
+       ing phase (see Trading, below.)
+
+   Trading
+       If any companies exist after a player moves  on  the  map,
+       that  player  will  be  given  the  chance to buy and sell
+       stock.  This is where the game is really played.  One must
+       determine  which  companies  are going to earn the highest
+       profits in the next round and invest  in  those  companies
+       more  heavily  than  ones that only have a small chance of
+       turning a profit.  (See  Strategy,  below.)   The  current
+       player's  cash  value  is  printed next to his name in the
+       general info window title.
+
+       Use the arrow keys to select a company you wish  to  trade
+       stock  in,  then  press  return.  You will be asked for an
+       amount to trade.  Enter the number of shares you  wish  to
+       purchase  in  this  company.   (Just press return again or
+       enter ``0'' if you don't really want to  trade  with  this
+       company.)   Choose  a  negative amount if you want to sell
+       shares (at 100% of their value.)  At this point, the  user
+       can  also press the 'm' key to purchase the maximum number
+       of shares possible, or press the 'n' key to  sell  all  of
+       his holdings in this company.
+
+       Once the player has completed trading, he can press escape
+       to end his turn, thereby transferring control to the  next
+       player.
+
+   Mergers
+       When a player chooses a sector of the map that would cause
+       two or more companies to touch, a merger occurs.
+
+
+
+Starlanes V1.2.2          29 March 1996                         3
+
+
+
+
+
+STARLANES(6)                                         STARLANES(6)
+
+
+       First, the companies sizes are  checked  and  the  company
+       with the larger size absorbs the smaller.
+
+       If  the  companies are the same size, the company with the
+       highest total worth absorbs the smaller.   (The  user  can
+       view  company  size and company total worth on the company
+       detail window, see above.)
+
+       Finally, if both company sizes and total worths match, the
+       companies will merge at random.
+
+       If a three or four-way merger occurs, the merges will take
+       place one at a time, in an order that is  somewhat  clock-
+       wise.
+
+       After  a  merger, each player will have half the number of
+       shares of held in the vanquished company added to the num-
+       ber  of  shares  held  in the still-existing company.  The
+       value of the still-existing company's price per share will
+       increase by the vanquished company's price per share.
+
+       Additionally, each player receives a cash bonus equal to
+
+              10 * stock price * holdings percentage,
+
+       where  stock  price is the old price per share of the van-
+       quished company and holdings percentage is the  percentage
+       of  total stock once owned in the vanquished company.  For
+       example, imagine that  Altair  Starways  (worth  $500  per
+       share)  is  merged  into  Denebola Shippers.  Also, assume
+       that the player owned 50% of the total  shares  in  Altair
+       Starways.   Using the formula, that player would receive a
+       bonus of
+
+              10 * $500 * 50% = $2,500.
+
+       For more hints on how to deal with mergers, see  Strategy,
+       below.
+
+   Stock Splits
+       When  a  company's  price per share climbs above $3,000, a
+       stock split occurs.  All player holdings in  that  company
+       are  doubled,  and  the  price  per  share is halved.  See
+       Strategy, below, for money making tips  during  and  after
+       stock splits.
+
+   Black Holes
+       Since  black  holes drain $500 from any company that is in
+       contact with them, it is possible that the company's price
+       per  share  will  drop to 0 or less.  If this happens, the
+       entire company is sucked out of space and all player hold-
+       ings are lost.
+
+       If a player attempts to place an infant company (+) near a
+
+
+
+Starlanes V1.2.2          29 March 1996                         4
+
+
+
+
+
+STARLANES(6)                                         STARLANES(6)
+
+
+       black hole (@), that infant company  will  be  immediately
+       sucked up, resulting again in an empty sector.
+
+       Likewise, if a player attempts to start a new company that
+       would normally be worth $500 or less per share next  to  a
+       black  hole,  the  sectors that the new company would have
+       occupied all become empty space (.).
+
+       For some ways to make black holes work to your  advantage,
+       see Strategy, below.
+
+   Game's End
+       The game ends when 54% of the map is filled with companies
+       (about 70 sectors.)  The player who made  the  final  move
+       receives  his 5% holdings bonus (see Holding Bonus, above)
+       and the final standings window is displayed.   The  player
+       with the highest total worth is the winner.
+
+   Strategy
+       In  order to maximize your profits, you must wisely invent
+       your cash.  For instance, if a company  is  near  a  black
+       hole, it is likely that it will lose $500 per share in the
+       next few rounds.  Likewise, if a company is near  a  star,
+       it might soon have a $500 gain.
+
+       Also, the larger the company, the greater that chance that
+       it will be added onto (just because it takes up more  room
+       on  the map.)  If you own 300 shares in a company, and its
+       value goes up by $100 per share, that's a $30,000 increase
+       in your net worth.
+
+       Another  thing to watch for is when companies are about to
+       merge.  Remember that the number of shares you own in  the
+       smaller  company  will be halved before being added to the
+       bigger one when they merge.  This  can  be  used  to  your
+       advantage, especially if the smaller company is worth sig-
+       nificantly less than the larger.  If the  big  company  is
+       worth  $2,000  per  share, and the small is worth $200 per
+       share, you can buy 10 times as many shares in the smaller.
+       When  the  companies  merge,  the  number of shares in the
+       smaller company is halved, but  it's  still  5  times  the
+       amount  of stock you could've purchased in the larger com-
+       pany.
+
+       Don't forget that when two companies  merge,  the  players
+       receive  a  cash  bonus  that depends on the percentage of
+       stock they owned in  the  smaller  company  (see  Mergers,
+       above.)  It is good to try to own a higher percentage than
+       anyone else.
+
+       A way to gain profit earning potential is to have a  large
+       number  of  shares in a company when the stock splits two-
+       for-one (see Stock Splits, above.)  Even though your  ini-
+       tial  net  worth  remains  the  same  after a stock split,
+
+
+
+Starlanes V1.2.2          29 March 1996                         5
+
+
+
+
+
+STARLANES(6)                                         STARLANES(6)
+
+
+       you'll now increase your net worth by twice the value  you
+       used  to  whenever  the  company's  price per share rises.
+       Also, if your opponent has 100 shares  and  you  have  150
+       before  the  split,  that'll  change to 200 shares and 300
+       shares, effectively increasing  your  lead  in  shares  by
+       100%.
+
+       Black holes weren't present in the original game, but were
+       added to give players who have fallen behind a  chance  to
+       shaft  the  leaders.   If your opponent owns 100 shares of
+       Altair Starways and you only own 50, you  can  extend  the
+       company  against  a  black  hole.  Your opponent will lose
+       $50,000 from his net worth, but you'll only lose  $25,000.
+
+       Finally,  a reminder to invest as much money as you possi-
+       ble can each round (unless it's too  risky.)   The  reason
+       for  this  is  the  5% cash bonus all players receive each
+       round based on their holdings (see Holdings Bonus, above.)
+       Your cash earns you no interest.
+
+FILES
+       /usr/local/games/starlanes
+       /usr/local/man/man6/starlanes.6
+
+AUTHOR
+       This version of Starlanes was written and is Copyright (C)
+       by Brian ``Beej''  Hall  1995-1997.   The  author  can  be
+       reached  at  beej@ecst.csuchico.edu.  Starlanes comes with
+       ABSOLUTELY NO WARRANTY.  This is free  software,  and  you
+       are  welcome  to redistribute it under certain conditions;
+       read the file COPYING for details.
+
+ACKNOWLEDGMENTS
+       I'd like to thank the  unnamed  authors  of  the  original
+       Starlanes for creating such a thought provoking and fun to
+       play text-based game.  I got my  first  copy  on  a  First
+       Osborne  Group  (FOG)  disk in what must have been 1982 or
+       so, and used to spend endless  hours  playing  against  my
+       friends.  For us, the game is just as fun as ever.  To the
+       original authors, I salute you!
+
+BUGS
+       There are no computer controlled players.
+
+       Doesn't respond if ^Z is pressed to suspend the game.
+
+       If only one person is playing, he or she  will  frequently
+       make  enough money to break the fixed-field-length windows
+       and/or cause the variable that holds player cash to  over-
+       flow.   Try to keep your earnings under $2 billion until I
+       convert these variables to long doubles.  :-)
+
+
+
+
+
+
+Starlanes V1.2.2          29 March 1996                         6
+
+
